@@ -24,4 +24,12 @@ async def on_ready():
 async def hello(ctx):
     await ctx.send("Hello, I am a bot.")
 
+@client.command()
+async def goodbye(ctx):
+    await ctx.send("Goodbye.")
+
+@client.command()
+async def test(ctx):
+    await ctx.send("Pong.")
+
 client.run(bot_api_key)
