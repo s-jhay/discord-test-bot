@@ -1,12 +1,14 @@
 import os
 
 from dotenv import load_dotenv
-
 import discord
 from discord.ext import commands
 
+
+# region environment loading
 load_dotenv('.env')
 bot_api_key = os.getenv('BOT_API_KEY')
+# endregion
 
 intents = discord.Intents.default()
 intents.message_content = True
