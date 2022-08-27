@@ -27,6 +27,12 @@ async def on_ready():
     print("Bot is now ready for use.")
     print("-------------------------")
 
+# test this one
+@client.event
+async def on_message(message):
+    if message.author.bot:
+        return
+
 # region events
 @client.event
 async def on_member_join(member):
@@ -51,6 +57,16 @@ async def hello(ctx):
 @client.command()
 async def goodbye(ctx):
     await ctx.send("Goodbye.")
+
+@client.command()
+async def summon(ctx):
+    channel = ctx.author.voice.channel
+    await channel.connect()
+@client.command()
+async def dismiss(ctx):
+    await ctx.voice_client.disconnect()
+
+
 
 # region bless
 # commented out to avoid API overage fees for now
