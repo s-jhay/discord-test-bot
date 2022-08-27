@@ -52,6 +52,7 @@ async def hello(ctx):
 async def goodbye(ctx):
     await ctx.send("Goodbye.")
 
+# region bless
 # commented out to avoid API overage fees for now
 # @client.command()
 # async def bless(ctx, *args):
@@ -82,6 +83,7 @@ async def goodbye(ctx):
 #     print(response.text)
 #     passage = json.loads(response.text)[0]["kjv"] + "\n*( ͡° ͜ʖ ͡°)*"
 #     return_string = return_string + f"Book: {book}\nChapter: {chapter}\nVerse: {verse}\n Passage: {passage}\n"
+# endregion
 # endregion
 
 client.run(bot_api_key)
