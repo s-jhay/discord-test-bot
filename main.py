@@ -1,5 +1,6 @@
 import json
 import os
+from queue import Empty
 
 from dotenv import load_dotenv
 import discord
@@ -51,18 +52,36 @@ async def hello(ctx):
 async def goodbye(ctx):
     await ctx.send("Goodbye.")
 
-@client.command()
-async def bless(ctx):
-    url = rapid_api_url
+# commented out to avoid API overage fees for now
+# @client.command()
+# async def bless(ctx, *args):
+#     url = rapid_api_url
+#     headers = {
+#     "X-RapidAPI-Key": rapid_api_key,
+#     "X-RapidAPI-Host": rapid_api_host
+#     }
+#     return_string = ""
 
-    headers = {
-	"X-RapidAPI-Key": rapid_api_key,
-	"X-RapidAPI-Host": rapid_api_host
-    }
+#     # endpoint scheme is as follows:
+#     # /<book>/<chapter>/<verse-start>/<verse-end>/<translation>/
+#     if len(args) != 2:
+#         book = "Eze"
+#         chapter = "23"
+#         verse = "20"
+#         return_string = "Usage: !bless <book> <verse>\nFor example:\n"
 
-    response = requests.request("GET", url, headers=headers)
+#     else:
+#         book = args[0]
+#         cherse = args[1].split(":")
+#         chapter = cherse[0]
+#         verse = cherse[1]
 
-    await ctx.send(json.loads(response.text)[0]["verses"][0]["kjv"] + " *( ͡° ͜ʖ ͡°)*")
+#     url = url + f"{book}/{chapter}/{verse}/{verse}/KJV/"
+    
+#     response = requests.request("GET", url, headers=headers)
+#     print(response.text)
+#     passage = json.loads(response.text)[0]["kjv"] + "\n*( ͡° ͜ʖ ͡°)*"
+#     return_string = return_string + f"Book: {book}\nChapter: {chapter}\nVerse: {verse}\n Passage: {passage}\n"
 # endregion
 
 client.run(bot_api_key)
