@@ -27,12 +27,6 @@ async def on_ready():
     print("Bot is now ready for use.")
     print("-------------------------")
 
-# test this one
-@client.event
-async def on_message(message):
-    if message.author.bot:
-        return
-
 # region events
 @client.event
 async def on_member_join(member):
@@ -51,6 +45,10 @@ async def test(ctx):
     await ctx.send("Pong.")
 
 @client.command()
+async def antilooptest(ctx):
+    await ctx.send("!test")
+
+@client.command()
 async def hello(ctx):
     await ctx.send("Hello, I am a bot.")
 
@@ -58,13 +56,27 @@ async def hello(ctx):
 async def goodbye(ctx):
     await ctx.send("Goodbye.")
 
-@client.command()
+@client.command(pass_context=True)
 async def summon(ctx):
-    channel = ctx.author.voice.channel
-    await channel.connect()
-@client.command()
+    try:
+        if (ctx.author.voice):
+            channel = ctx.author.voice.channel
+            await channel.connect()
+
+        else:
+            await ctx.send("Must join a voice channel before summoning! :C")
+
+    except discord.errors.ClientException:
+        await ctx.send("Already in voice channel!")
+
+@client.command(pass_context=True)
 async def dismiss(ctx):
-    await ctx.voice_client.disconnect()
+    if (ctx.voice_client):
+        await ctx.guild.voice_client.disconnect()
+        await ctx.send("Leaving voice channel!")
+
+    else:
+        await ctx.send("No voice channel to leave! :C")
 
 # region bless
 # commented out to avoid API overage fees for now
