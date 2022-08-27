@@ -66,8 +66,6 @@ async def summon(ctx):
 async def dismiss(ctx):
     await ctx.voice_client.disconnect()
 
-
-
 # region bless
 # commented out to avoid API overage fees for now
 # @client.command()
